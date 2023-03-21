@@ -14,6 +14,9 @@ class UserController extends Controller
     return view('users.index', /*['users' => $users]*/ compact('users'));
     }
     public function show($id){
-        dd('user.show',$id);
+        //$user = User::where('id', '=', $id)->first(); //Pesquisa usuario pelo ID passado pela barra do navegador
+        if(!$user = User::find($id))
+            return redirect()->back();//ou pode-se utilizar route('users.index);
+        return view('users.show',compact('user'));
     }
 }
